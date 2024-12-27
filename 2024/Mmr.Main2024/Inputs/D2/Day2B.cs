@@ -15,48 +15,37 @@ public class Day02B : DayAbstract
         
         foreach (var levels in levelsPerRow)
         {
-            Console.WriteLine("levels: "+string.Join(",", levels));
             if (levels.Count() == 1)
             {
                 safeRows++;
                 continue;
             }
-            
-            // invalid level
-            if (Math.Abs(levels.First() - levels[1]) > tolerance) continue;
 
             if (AreLevelsSafe(levels, tolerance))
             {
                 safeRows++;
-                Console.WriteLine("imidiate safe!");
-                Console.WriteLine("-----------------");
                 continue;
             }
-            
-            // try to remove each item and check if it is safe
-            var safeWithout = 0;
-            List<int> newLevels = new();
-            for (int i = 0; i < levels.Count; i++)
-            {
-                Console.WriteLine("removing "+i);
-                newLevels = levels.ToList();
-                newLevels.RemoveAt(i);
-                
-                Console.WriteLine("new levels: " + string.Join(",", newLevels));
 
-                if (AreLevelsSafe(newLevels, tolerance))
-                {
-                    safeWithout++;
-                }
-                Console.WriteLine("safeWithout: "+safeWithout);
-            }
-            
-            if (safeWithout == 1) safeRows++;
-            
-            Console.WriteLine("-----------------");
+            var isOk = RemoveItems(tolerance, levels);
+            if (isOk == 1) safeRows++;
         }
 
         Result = safeRows;
+    }
+
+    private static int RemoveItems(int tolerance, List<int>? levels)
+    {
+        List<int> newLevels = new();
+        for (int i = 0; i < levels.Count; i++)
+        {
+            newLevels = levels.ToList();
+            newLevels.RemoveAt(i);
+
+            if (AreLevelsSafe(newLevels, tolerance))
+                return 1;
+        }
+        return 0;
     }
 
     private static bool AreLevelsSafe(List<int> levels, int tolerance)
@@ -71,7 +60,6 @@ public class Day02B : DayAbstract
                 isSafe = false;
                 break;
             }
-            // Console.WriteLine("diff "+levels[i] +" - "+  levels[i+1]+ " = "+ Math.Abs(levels[i] - levels[i+1]));
             var diff = Math.Abs(levels[i] - levels[i+1]);
             if ( diff > tolerance || diff == 0)
             {

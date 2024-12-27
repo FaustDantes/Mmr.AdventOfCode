@@ -20,7 +20,8 @@ public class Program
         //     "C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D2\\input.txt"));
         // PrintDayResult(res2A, "2A");
         var res2B = new Day02B().MainMethod(new Reader(
-            "C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D2\\input.txt"));
+            @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D2\input.txt"));
+            //"C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D2\\input.txt"));
         PrintDayResult(res2B, "2B");
     }
     
