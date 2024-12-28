@@ -3,12 +3,13 @@ using Mmr.Main2024;
 using Mmr.Main2024.Inputs.D1;
 using Mmr.Main2024.Inputs.D2;
 using Mmr.Main2024.Inputs.D3;
+using Mmr.Main2024.Inputs.D4;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        RunDay("3");
+        RunDay("4");
     }
 
     private static void RunDay(string dayCode)
@@ -34,14 +35,25 @@ public class Program
                 break;
 
             case "3":
-                // var res3A = new Day03A().MainMethod(new Reader(
-                //      @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D3\input.txt"));
-                // PrintDayResult(res3A, "3A");
+                var res3A = new Day03A().MainMethod(new Reader(
+                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D3\input.txt"));
+                PrintDayResult(res3A, "3A");
 
                 var res3B = new Day03B().MainMethod(new Reader(
                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D3\input.txt"));
                 PrintDayResult(res3B, "3B");
                 break;
+
+            case "4":
+                var res4A = new Day04A().MainMethod(new Reader(
+                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D4\input.txt"));
+               PrintDayResult(res4A, "4A");
+
+                var res4B = new Day04B().MainMethod(new Reader(
+                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D4\input.txt"));
+                PrintDayResult(res4B, "4B");
+                break;
+
             default:
                 break;
         }
