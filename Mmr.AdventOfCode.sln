@@ -1,5 +1,5 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmr.Main2024", "Mmr.Main2024\Mmr.Main2024.csproj", "{8EB51346-730B-4828-A67C-45EBFDE09633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmr.Main2024", "2024\Mmr.Main2024\Mmr.Main2024.csproj", "{8EB51346-730B-4828-A67C-45EBFDE09633}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
