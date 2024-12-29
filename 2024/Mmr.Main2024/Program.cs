@@ -4,12 +4,13 @@ using Mmr.Main2024.Inputs.D1;
 using Mmr.Main2024.Inputs.D2;
 using Mmr.Main2024.Inputs.D3;
 using Mmr.Main2024.Inputs.D4;
+using Mmr.Main2024.Inputs.D5;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        RunDay("4");
+        RunDay("5");
     }
 
     private static void RunDay(string dayCode)
@@ -52,6 +53,16 @@ public class Program
                 var res4B = new Day04B().MainMethod(new Reader(
                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D4\input.txt"));
                 PrintDayResult(res4B, "4B");
+                break;
+            
+            case "5":
+                var res5A = new Day05A().MainMethod(new Reader(
+                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D5\input.txt"));
+               PrintDayResult(res5A, "5A");
+
+                var res5B = new Day05B().MainMethod(new Reader(
+                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D5\input.txt"));
+                PrintDayResult(res5B, "5B");
                 break;
 
             default:
