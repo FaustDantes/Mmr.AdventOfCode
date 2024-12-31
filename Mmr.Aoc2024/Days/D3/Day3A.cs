@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Mmr.Main2024.Inputs.D3;
+namespace Mmr.Aoc2024.Days.D3;
 
 public class Day03A : DayAbstract
 {
@@ -9,7 +9,7 @@ public class Day03A : DayAbstract
         var memory = reader.ReadAll();
         var pattern = @"mul\((\d{1,3}),(\d{1,3})\)";
         var sums = Regex.Matches(memory, pattern);
-        
+
         var res = 0;
 
         foreach (Match match in sums)

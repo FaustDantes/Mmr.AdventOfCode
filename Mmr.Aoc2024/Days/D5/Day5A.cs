@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Mmr.Main2024.Inputs.D5;
+namespace Mmr.Aoc2024.Days.D5;
 
 public class Day05A : DayAbstract
 {
@@ -53,7 +53,7 @@ public class Day05A : DayAbstract
                     {
                         res++;
                     }
-                      // diagonal right
+                    // diagonal right
                     if (j + 3 < columnLength &&
                         metrix[i - 1][j + 1] == 'M' && metrix[i - 2][j + 2] == 'A' && metrix[i - 3][j + 3] == 'S')
                     {

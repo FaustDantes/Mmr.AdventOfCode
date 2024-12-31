@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Mmr.Main2024.Inputs.D3;
+namespace Mmr.Aoc2024.Days.D3;
 
 public class Day03B : DayAbstract
 {

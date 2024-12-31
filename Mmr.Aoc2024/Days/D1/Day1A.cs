@@ -1,4 +1,4 @@
-﻿namespace Mmr.Aoc2024.Days.D1;
+﻿namespace Mmr.Aoc2024;
 
 public class Day01A : DayAbstract
 {

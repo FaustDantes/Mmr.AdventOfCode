@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
 
-namespace Mmr.Main2024;
+namespace Mmr.Aoc2024;
 
 public class Reader
 {

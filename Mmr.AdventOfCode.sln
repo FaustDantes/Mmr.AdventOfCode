@@ -1,5 +1,7 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmr.Main2024", "2024\Mmr.Main2024\Mmr.Main2024.csproj", "{8EB51346-730B-4828-A67C-45EBFDE09633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmr.Aoc2024", "Mmr.Aoc2024\Mmr.Aoc2024.csproj", "{8EB51346-730B-4828-A67C-45EBFDE09633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmr.Aoc.Common", "Mmr.Aoc.Common\Mmr.Aoc.Common.csproj", "{FBFC3ED1-D52C-4A54-B4E8-3233C8972073}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,5 +13,9 @@ Global
 		{8EB51346-730B-4828-A67C-45EBFDE09633}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EB51346-730B-4828-A67C-45EBFDE09633}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EB51346-730B-4828-A67C-45EBFDE09633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBFC3ED1-D52C-4A54-B4E8-3233C8972073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBFC3ED1-D52C-4A54-B4E8-3233C8972073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBFC3ED1-D52C-4A54-B4E8-3233C8972073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBFC3ED1-D52C-4A54-B4E8-3233C8972073}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

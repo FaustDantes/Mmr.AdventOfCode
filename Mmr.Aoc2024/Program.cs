@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
-using Mmr.Main2024;
-using Mmr.Main2024.Inputs.D1;
-using Mmr.Main2024.Inputs.D2;
-using Mmr.Main2024.Inputs.D3;
-using Mmr.Main2024.Inputs.D4;
-using Mmr.Main2024.Inputs.D5;
+using Mmr.Aoc2024.Days.D1;
+using Mmr.Aoc2024.Days.D2;
+using Mmr.Aoc2024.Days.D3;
+using Mmr.Aoc2024.Days.D4;
+using Mmr.Aoc2024.Days.D5;
 
 public class Program
 {

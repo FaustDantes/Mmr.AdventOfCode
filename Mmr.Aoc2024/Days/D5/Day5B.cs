@@ -1,4 +1,4 @@
-﻿namespace Mmr.Main2024.Inputs.D5;
+﻿namespace Mmr.Aoc2024.Days.D5;
 
 public class Day05B : DayAbstract
 {
@@ -32,7 +32,7 @@ public class Day05B : DayAbstract
                             continue;
                         }
 
-                     // S on the left
+                    // S on the left
                     if (metrix[i - 1][j - 1] == 'S' && metrix[i + 1][j - 1] == 'S')
                         if (metrix[i - 1][j + 1] == 'M' && metrix[i + 1][j + 1] == 'M')
                         {
@@ -40,15 +40,15 @@ public class Day05B : DayAbstract
                             continue;
                         }
 
-                        /*
-                         -1   S . S       M . M
-                          0   . A .       . A .
-                         +1   M . M       S . S
-                         */
+                    /*
+                     -1   S . S       M . M
+                      0   . A .       . A .
+                     +1   M . M       S . S
+                     */
 
                     // S on the bottom
                     if (metrix[i - 1][j - 1] == 'S' && metrix[i - 1][j + 1] == 'S')
-                        if (metrix[i +1][j - 1] == 'M' && metrix[i + 1][j + 1] == 'M')
+                        if (metrix[i + 1][j - 1] == 'M' && metrix[i + 1][j + 1] == 'M')
                         {
                             res++;
                             continue;
@@ -56,7 +56,7 @@ public class Day05B : DayAbstract
 
                     // M on the bottom
                     if (metrix[i - 1][j - 1] == 'M' && metrix[i - 1][j + 1] == 'M')
-                        if (metrix[i +1][j - 1] == 'S' && metrix[i + 1][j + 1] == 'S')
+                        if (metrix[i + 1][j - 1] == 'S' && metrix[i + 1][j + 1] == 'S')
                         {
                             res++;
                             continue;
