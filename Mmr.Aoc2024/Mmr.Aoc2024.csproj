@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Mmr.Aoc.Common\Mmr.Aoc.Common.csproj" />
+    </ItemGroup>
 </Project>

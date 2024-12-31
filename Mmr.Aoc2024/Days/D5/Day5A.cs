@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Mmr.Aoc.Common;
 
 namespace Mmr.Aoc2024.Days.D5;
 

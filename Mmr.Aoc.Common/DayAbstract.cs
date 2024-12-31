@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace Mmr.Aoc2024;
+namespace Mmr.Aoc.Common;
 
 public abstract class DayAbstract
 {

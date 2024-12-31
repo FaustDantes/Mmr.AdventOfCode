@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Mmr.Aoc2024;
+namespace Mmr.Aoc.Common;
 
 public class Reader
 {

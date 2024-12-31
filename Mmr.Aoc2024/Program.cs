@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using Mmr.Aoc.Common;
+using Mmr.Aoc2024;
 using Mmr.Aoc2024.Days.D1;
 using Mmr.Aoc2024.Days.D2;
 using Mmr.Aoc2024.Days.D3;
