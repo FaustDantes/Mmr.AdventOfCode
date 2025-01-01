@@ -1,6 +1,6 @@
 ﻿namespace Mmr.Aoc2024.Days;
 
-public class Day05B : DayAbstract
+public class Day06B : DayAbstract
 {
     protected override void Runner(Reader reader)
     {

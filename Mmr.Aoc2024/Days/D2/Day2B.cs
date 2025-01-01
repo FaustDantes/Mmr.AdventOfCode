@@ -1,6 +1,4 @@
-﻿using Mmr.Aoc.Common;
-
-namespace Mmr.Aoc2024.Days.D2;
+﻿namespace Mmr.Aoc2024.Days;
 
 public class Day02B : DayAbstract
 {

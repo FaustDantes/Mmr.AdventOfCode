@@ -1,7 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Mmr.Aoc.Common;
-
-namespace Mmr.Aoc2024.Days.D3;
+﻿namespace Mmr.Aoc2024.Days;
 
 public class Day03A : DayAbstract
 {

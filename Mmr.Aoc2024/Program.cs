@@ -1,19 +1,16 @@
 ﻿using System.Diagnostics;
-using Mmr.Aoc2024;
-using Mmr.Aoc2024.Days.D1;
-using Mmr.Aoc2024.Days.D2;
-using Mmr.Aoc2024.Days.D3;
-using Mmr.Aoc2024.Days.D4;
-using Mmr.Aoc2024.Days.D5;
+using Mmr.Aoc2024.Days;
+
+namespace Mmr.Aoc2024;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        RunDay("5");
+        RunYear2024("6");
     }
-
-    private static void RunDay(string dayCode)
+//https://github.com/encse/adventofcode/blob/master/2024/Day04/Solution.cs
+    private static void RunYear2024(string dayCode)
     {
         switch (dayCode)
         {
@@ -62,9 +59,19 @@ public class Program
                     AbsolutePath(5)));
                 PrintDayResult(res5A, "5A");
 
-                // var res5B = new Day05B().MainMethod(new Reader(
-                //     @"Mmr.Aoc2024/Days/D5/input.txt"));
-                // PrintDayResult(res5B, "5B");
+                var res5B = new Day05B().MainMethod(new Reader(
+                    AbsolutePath(5)));
+                PrintDayResult(res5B, "5B");
+                break;
+            
+            case "6":
+                var res6A = new Day06A().MainMethod(new Reader(
+                    AbsolutePath(6)));
+                PrintDayResult(res6A, "6A");
+            
+                var res6B = new Day06B().MainMethod(new Reader(
+                    AbsolutePath(6)));
+                PrintDayResult(res6B, "6B");
                 break;
 
             default:
