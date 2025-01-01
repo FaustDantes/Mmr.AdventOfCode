@@ -1,75 +1,65 @@
-﻿using System.Text.RegularExpressions;
-using Mmr.Aoc.Common;
-
-namespace Mmr.Aoc2024.Days.D5;
+﻿namespace Mmr.Aoc2024.Days.D5;
 
 public class Day05A : DayAbstract
 {
     protected override void Runner(Reader reader)
     {
         var res = 0;
-        var text = reader.ReadAll();
+        var input = reader.ReadAndGetLines();
 
-        var horizont = Regex.Matches(text, "XMAS");
-        res += horizont.Select(x => x.Success).Count();
+        var orderingRules = input.Where(x => x.Contains("|"))
+            .Select(x => x.Split("|"))
+            .Select(x => Array.ConvertAll(x, int.Parse))
+            .GroupBy(x => x[0])
+            .ToDictionary(
+                group => group.Key,
+                group => group.SelectMany(arr => arr.Skip(1)).ToArray()
+            );
 
-        var horizontBack = Regex.Matches(text, "SAMX");
-        res += horizontBack.Select(x => x.Success).Count();
+        var pages = input.Where(x => x.Contains(","))
+            .Select(x => x.Split(","))
+            .Select(x => Array.ConvertAll(x, int.Parse))
+            .ToList();
 
-        var metrix = reader.ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
-        var rowLength = metrix[0].Length;
-        var columnLength = metrix.Length;
-
-        for (var i = 0; i < rowLength; i++)
+        var checkedPageNumbers = 0;
+        foreach (var page in pages)
         {
-            for (var j = 0; j < columnLength; j++)
+            for (var i = 0; i < page.Length; i++)
             {
-                // direction top to bottom  
-                if (metrix[i][j] == 'X' && i + 3 < rowLength)
+                if (orderingRules.Keys.Contains(page[i]))
                 {
-                    // in the same column
-                    if (metrix[i + 1][j] == 'M' && metrix[i + 2][j] == 'A' && metrix[i + 3][j] == 'S')
-                    {
-                        res++;
-                    }
-                    // diagonal right
-                    if (j + 3 < columnLength &&
-                        metrix[i + 1][j + 1] == 'M' && metrix[i + 2][j + 2] == 'A' && metrix[i + 3][j + 3] == 'S')
-                    {
-                        res++;
-                    }
-                    // diagonal left
-                    if (j - 3 < columnLength && j - 3 >= 0 &&
-                        metrix[i + 1][j - 1] == 'M' && metrix[i + 2][j - 2] == 'A' && metrix[i + 3][j - 3] == 'S')
-                    {
-                        res++;
-                    }
+                    _ = orderingRules.TryGetValue(page[i], out var rules);
+                    checkedPageNumbers += CheckPreviousNumbers(page, i, rules!);
                 }
-
-                // direction bottom to top   
-                if (metrix[i][j] == 'X' && i - 3 < rowLength && i - 3 >= 0)
+                else
                 {
-                    // in the same column
-                    if (metrix[i - 1][j] == 'M' && metrix[i - 2][j] == 'A' && metrix[i - 3][j] == 'S')
-                    {
-                        res++;
-                    }
-                    // diagonal right
-                    if (j + 3 < columnLength &&
-                        metrix[i - 1][j + 1] == 'M' && metrix[i - 2][j + 2] == 'A' && metrix[i - 3][j + 3] == 'S')
-                    {
-                        res++;
-                    }
-                    // diagonal left
-                    if (j - 3 < columnLength && j - 3 >= 0 &&
-                        metrix[i - 1][j - 1] == 'M' && metrix[i - 2][j - 2] == 'A' && metrix[i - 3][j - 3] == 'S')
-                    {
-                        res++;
-                    }
+                    // no need to check
+                    checkedPageNumbers++;
                 }
             }
+
+            if (checkedPageNumbers == page.Length)
+            {
+                res += GetMiddleNumber(page);
+            }
+            
+            checkedPageNumbers = 0;
         }
 
         Result = res.ToString();
+    }
+
+    private int CheckPreviousNumbers(int[] page, int currentIndex, int[] rules)
+    {
+        if (currentIndex == 0) return 1;
+        var specificRules = rules.Where(page.Contains).ToArray();
+        var indexes = specificRules.Select(rule => Array.IndexOf(page, rule)).ToArray();
+        return indexes.All(x => x > currentIndex) ? 1 : 0;
+    }
+
+    private int GetMiddleNumber(int[] page)
+    {
+        var middle = page.Length / 2;
+        return page[middle];
     }
 }

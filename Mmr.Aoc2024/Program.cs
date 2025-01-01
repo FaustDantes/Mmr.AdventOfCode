@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Mmr.Aoc.Common;
 using Mmr.Aoc2024;
 using Mmr.Aoc2024.Days.D1;
 using Mmr.Aoc2024.Days.D2;
@@ -20,55 +19,63 @@ public class Program
         {
             case "1":
                 var res1A = new Day01A().MainMethod(new Reader(
-                    "C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D1\\input.txt"));
+                    AbsolutePath(1)));
                 PrintDayResult(res1A, "1A");
+
                 var res1B = new Day01B().MainMethod(new Reader(
-                    "C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D1\\input.txt"));
+                    AbsolutePath(1)));
                 PrintDayResult(res1B, "1B");
                 break;
 
             case "2":
                 var res2A = new Day02A().MainMethod(new Reader(
-                    "C:\\Users\\m_mar\\Documents\\repos\\MMr\\Mmr.AdventOfCode\\2024\\Mmr.Main2024\\Inputs\\D2\\input.txt"));
+                    AbsolutePath(2)));
                 PrintDayResult(res2A, "2A");
+
                 var res2B = new Day02B().MainMethod(new Reader(
-                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D2\input.txt"));
+                    AbsolutePath(2)));
                 PrintDayResult(res2B, "2B");
                 break;
 
             case "3":
                 var res3A = new Day03A().MainMethod(new Reader(
-                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D3\input.txt"));
+                    AbsolutePath(3)));
                 PrintDayResult(res3A, "3A");
 
                 var res3B = new Day03B().MainMethod(new Reader(
-                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D3\input.txt"));
+                    AbsolutePath(3)));
                 PrintDayResult(res3B, "3B");
                 break;
 
             case "4":
                 var res4A = new Day04A().MainMethod(new Reader(
-                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D4\input.txt"));
-               PrintDayResult(res4A, "4A");
+                    AbsolutePath(4)));
+                PrintDayResult(res4A, "4A");
 
                 var res4B = new Day04B().MainMethod(new Reader(
-                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D4\input.txt"));
+                    AbsolutePath(4)));
                 PrintDayResult(res4B, "4B");
                 break;
-            
+
             case "5":
                 var res5A = new Day05A().MainMethod(new Reader(
-                     @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D5\input.txt"));
-               PrintDayResult(res5A, "5A");
+                    AbsolutePath(5)));
+                PrintDayResult(res5A, "5A");
 
-                var res5B = new Day05B().MainMethod(new Reader(
-                    @"C:\Users\m_mar\Documents\repos\Mmr.AdventOfCode\2024\Mmr.Main2024\Inputs\D5\input.txt"));
-                PrintDayResult(res5B, "5B");
+                // var res5B = new Day05B().MainMethod(new Reader(
+                //     @"Mmr.Aoc2024/Days/D5/input.txt"));
+                // PrintDayResult(res5B, "5B");
                 break;
 
             default:
+                PrintDayResult(new ValueTuple<string, Stopwatch>(), "XY");
                 break;
         }
+    }
+
+    private static string AbsolutePath(int day)
+    {
+        return @"C:\Users\m_mar\Documents\repos\MMr\Mmr.AdventOfCode\Mmr.Aoc2024\Days\D"+day+@"\input.txt"; 
     }
 
     private static void PrintDayResult((string output, Stopwatch sw) res, string day)
