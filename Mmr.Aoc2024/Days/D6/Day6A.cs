@@ -1,65 +1,119 @@
 ﻿namespace Mmr.Aoc2024.Days;
 
 public class Day06A : DayAbstract
-{   
+{
+    public const char Obsticle = '#';
+    public const char EmptySpace = '.';
+
     protected override void Runner(Reader reader)
     {
-        var res = 0;
-        var input = reader.ReadAndGetLines();
+        var input = reader.ReadAsMatrix();
+        var guard = Guard.CreateFromMatrix(input);
+// For demo and debug purposes
+        //    PrintPlan(input, 0);
 
-        var orderingRules = input.Where(x => x.Contains("|"))
-            .Select(x => x.Split("|"))
-            .Select(x => Array.ConvertAll(x, int.Parse))
-            .GroupBy(x => x[0])
-            .ToDictionary(
-                group => group.Key,
-                group => group.SelectMany(arr => arr.Skip(1)).ToArray()
-            );
+        PlayGame(input, guard);
+        Result = guard.StepCount;
+    }
 
-        var pages = input.Where(x => x.Contains(","))
-            .Select(x => x.Split(","))
-            .Select(x => Array.ConvertAll(x, int.Parse))
-            .ToList();
+    private void PlayGame(char[][] input, Guard guard)
+    {
+        var xMaxBoundary = input[0].Length;
+        var yMaxBoundary = input.Length;
 
-        var checkedPageNumbers = 0;
-        foreach (var page in pages)
+        var iteration = 0;
+        while (xMaxBoundary > guard.PositionX
+               || yMaxBoundary > guard.PositionY
+               || guard.PositionX <= 0
+               || guard.PositionY <= 0)
         {
-            for (var i = 0; i < page.Length; i++)
+            var isDone = MakeStep(input, guard, iteration);
+            if (isDone) break;
+
+            iteration++;
+        }
+    }
+
+    private bool MakeStep(char[][] map, Guard guard, int iteration)
+    {
+        // For demo and debug purposes
+        //  Thread.Sleep(100);
+        //  PrintPlan(map, iteration);
+
+        var xCurrent = guard.PositionX;
+        var yCurrent = guard.PositionY;
+        map[xCurrent][yCurrent] = 'X';
+
+        var xNew = guard.Orientation switch
+        {
+            Orientations.Up => xCurrent - 1,
+            Orientations.Right => xCurrent,
+            Orientations.Down => xCurrent + 1,
+            Orientations.Left => xCurrent,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        var yNew = guard.Orientation switch
+        {
+            Orientations.Up => yCurrent,
+            Orientations.Right => yCurrent + 1,
+            Orientations.Down => yCurrent,
+            Orientations.Left => yCurrent - 1,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        var isOutOfBounds = xNew < 0 || xNew >= map[0].Length || yNew < 0 || yNew >= map.Length;
+        if (isOutOfBounds) return true;
+
+        if (map[xNew][yNew] != Obsticle)
+        {
+            guard.PositionX = xNew;
+            guard.PositionY = yNew;
+            if (map[xNew][yNew] == EmptySpace)
             {
-                if (orderingRules.Keys.Contains(page[i]))
+                guard.StepCount++;
+            }
+
+            map[xNew][yNew] = guard.Marker;
+            return false;
+        }
+
+        if (map[xNew][yNew] == Obsticle)
+        {
+            guard.Rotate();
+        }
+
+        return false;
+    }
+
+    private void PrintPlan(char[][] matrix, int iteration)
+    {
+        Console.Clear();
+        Console.WriteLine($"------- step: {iteration}. ----------");
+
+        int rows = matrix[0].Length;
+        int cols = matrix.Length;
+
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                if (matrix[row][col] == '#')
                 {
-                    _ = orderingRules.TryGetValue(page[i], out var rules);
-                    checkedPageNumbers += CheckPreviousNumbers(page, i, rules!);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(matrix[row][col] + "");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
                 else
                 {
-                    // no need to check
-                    checkedPageNumbers++;
+                    Console.Write(matrix[row][col] + "");
                 }
             }
 
-            if (checkedPageNumbers == page.Length)
-            {
-                res += GetMiddleNumber(page);
-            }
-            
-            checkedPageNumbers = 0;
+            Console.WriteLine();
         }
 
-        Result = res.ToString();
-    }
-
-    private int CheckPreviousNumbers(int[] page, int currentIndex, int[] rules)
-    {
-        if (currentIndex == 0) return 1;
-        var specificRules = rules.Where(page.Contains).ToArray();
-        var indexes = specificRules.Select(rule => Array.IndexOf(page, rule)).ToArray();
-        return indexes.All(x => x > currentIndex) ? 1 : 0;
-    }
-
-    private int GetMiddleNumber(int[] page)
-    {
-        var middle = page.Length / 2;
-        return page[middle];
+        Console.ForegroundColor = ConsoleColor.White;
     }
 }

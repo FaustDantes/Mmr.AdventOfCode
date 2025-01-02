@@ -1,38 +1,64 @@
-﻿namespace Mmr.Aoc2024.Days;
+﻿using System.Collections.Immutable;
+using System.Numerics;
+using Map = System.Collections.Immutable.ImmutableDictionary<System.Numerics.Complex, char>;
+
+namespace Mmr.Aoc2024.Days;
 
 public class Day06B : DayAbstract
 {
+    Complex Up = Complex.ImaginaryOne;
+    Complex TurnRight = -Complex.ImaginaryOne;
+
     protected override void Runner(Reader reader)
     {
-        var input = reader.ReadAndGetLines();
-        var orderingRules = input.Where(x => x.Contains("|"));
-        var pages = input.Where(x => x.Contains(","));
+        var (map, start) = Parse(reader.ReadAndGetLines());
 
-        var (updates, comparer) = Parse(orderingRules, pages);
-
-        Result = updates
-            .Where(pages => !Sorted(pages, comparer))
-            .Select(pages => pages.OrderBy(p => p, comparer).ToArray())
-            .Sum(GetMiddleNumber);
+        Result = Walk(map, start).positions.Count();
+        return;
+        // try a blocker in each locations visited by the guard counting the loops
+        Result = Walk(map, start).positions
+            .AsParallel()
+            .Count(pos => Walk(map.SetItem(pos, '#'), start).isLoop);
     }
 
-    private (string[][] updates, Comparer<string>) Parse(IEnumerable<string> orderingRules, IEnumerable<string> pages)
+    // returns the positions visited when starting from 'pos', isLoop is set if the 
+    // guard enters a cycle.
+    (IEnumerable<Complex> positions, bool isLoop) Walk(Map map, Complex pos)
     {
-        var comparer =
-            Comparer<string>.Create((p1, p2) => orderingRules.Contains(p1 + "|" + p2) ? -1 : 1);
+        var seen = new HashSet<(Complex pos, Complex dir)>();
+        var dir = Up;
+        while (map.ContainsKey(pos) && !seen.Contains((pos, dir)))
+        {
+            seen.Add((pos, dir));
+            if (map.GetValueOrDefault(pos + dir) == '#')
+            {
+                dir *= TurnRight;
+            }
+            else
+            {
+                pos += dir;
+            }
+        }
 
-        var updates = pages.Select(line => line.Split(",")).ToArray();
-        return (updates, comparer);
+        return (
+            positions: seen.Select(s => s.pos).Distinct(),
+            isLoop: seen.Contains((pos, dir))
+        );
     }
 
-    private int GetMiddleNumber(string[] page)
+    // store the grid in a dictionary, to make bounds checks and navigation simple
+    // start represents the starting postion of the guard
+    (Map map, Complex start) Parse(string[] input)
     {
-        var middle = page.Length / 2;
-        return int.Parse(page[middle]);
-    }
+        var lines = input;
+        var map = (
+            from y in Enumerable.Range(0, lines.Length)
+            from x in Enumerable.Range(0, lines[0].Length)
+            select new KeyValuePair<Complex, char>(-Up * y + x, lines[y][x])
+        ).ToImmutableDictionary();
 
-    private bool Sorted(string[] pages, Comparer<string> comparer)
-    {
-        return Enumerable.SequenceEqual(pages, pages.OrderBy(x => x, comparer));
+        var start = map.First(x => x.Value == '^').Key;
+
+        return (map, start);
     }
 }

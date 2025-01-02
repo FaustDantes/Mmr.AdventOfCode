@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Mmr.Aoc2024.Days;
 
+
 namespace Mmr.Aoc2024;
 
 public class Program

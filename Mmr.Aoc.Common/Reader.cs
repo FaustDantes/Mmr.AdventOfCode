@@ -24,6 +24,10 @@ public class Reader
         }
     }
 
+    public char[][] ReadAsMatrix()
+    {
+        return ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
+    }
 
     public string ReadAll()
     {
