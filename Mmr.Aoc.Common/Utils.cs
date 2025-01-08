@@ -6,4 +6,9 @@ public static class Utils
     {
         return list.Aggregate((a, x) => a * x);
     }
+    
+    public static long Concate(this long a, long b)
+    {
+        return long.Parse(a+""+b);
+    }
 }
