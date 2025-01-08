@@ -8,7 +8,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        RunYear2024("6");
+        RunYear2024("7");
     }
 //https://github.com/encse/adventofcode/blob/master/2024/Day04/Solution.cs
     private static void RunYear2024(string dayCode)
@@ -74,6 +74,17 @@ public class Program
                     AbsolutePath(6)));
                 PrintDayResult(res6B, "6B");
                 break;
+            
+            case "7":
+                var res = new Day07A().MainMethod(new Reader(
+                    AbsolutePath(7)));
+                PrintDayResult(res, "7A");
+            
+                res = new Day07B().MainMethod(new Reader(
+                    AbsolutePath(7)));
+                PrintDayResult(res, "7B");
+                break;
+                
 
             default:
                 PrintDayResult(new ValueTuple<string, Stopwatch>(), "XY");
