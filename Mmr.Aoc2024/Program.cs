@@ -8,9 +8,9 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        RunYear2024("7");
+        RunYear2024("8");
     }
-//https://github.com/encse/adventofcode/blob/master/2024/Day04/Solution.cs
+
     private static void RunYear2024(string dayCode)
     {
         switch (dayCode)
@@ -83,6 +83,16 @@ public class Program
                 res = new Day07B().MainMethod(new Reader(
                     AbsolutePath(7)));
                 PrintDayResult(res, "7B");
+                break;
+            
+            case "8":
+                res = new Day08A().MainMethod(new Reader(
+                    AbsolutePath(8)));
+                PrintDayResult(res, "8A");
+            
+                res = new Day08B().MainMethod(new Reader(
+                    AbsolutePath(8)));
+                PrintDayResult(res, "8B");
                 break;
                 
 
