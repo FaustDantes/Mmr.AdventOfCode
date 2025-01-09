@@ -12,7 +12,7 @@ public abstract class DayAbstract
 
     public (string output, Stopwatch sw) MainMethod(Reader reader, bool isDebugMode = false)
     {
-        this.IsDebugMode = isDebugMode;
+        IsDebugMode = isDebugMode;
         reader.ReadAndGetLines();
         Stopwatch = new Stopwatch();
 

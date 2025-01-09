@@ -399,3 +399,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 Mmr.Aoc2024/Days/*/input.txt
+Mmr.Aoc2024/input.txt
