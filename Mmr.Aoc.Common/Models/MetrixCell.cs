@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 
 namespace Mmr.Aoc.Common.Models;
 
@@ -41,5 +42,37 @@ public class MetrixCell<T>
     public override string ToString()
     {
         return $"Cell: '{Value}' on coordinate [{Coordinate.X}, {Coordinate.Y}]";
+    }
+}
+
+
+public class ComplexCell<T>
+{
+    public Complex Coordinate { get; }
+    public T Value { get; set; }
+
+    /// <summary>
+    /// Define complex metrix
+    /// </summary>
+    /// <param name="x">real part</param>
+    /// <param name="y">imaginary</param>
+    /// <param name="value"></param>
+    public ComplexCell(int x, int y, T value)
+    {
+        Coordinate = new Complex(x, y);
+        Value = value;
+    }
+    
+    /// <summary>
+    /// Distance between two points
+    /// </summary>
+    public Complex DistanceTo(ComplexCell<T> destination)
+    {
+        return Coordinate - destination.Coordinate;
+    }
+    
+    public override string ToString()
+    {
+        return $"Cell: '{Value}' on coordinate [{Coordinate.Real}, {Coordinate.Imaginary}]";
     }
 }

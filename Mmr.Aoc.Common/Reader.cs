@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Numerics;
+using Mmr.Aoc.Common.Models;
 
 namespace Mmr.Aoc.Common;
 
@@ -27,6 +30,26 @@ public class Reader
     public char[][] ReadAsMatrix()
     {
         return ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
+    }
+
+    public ImmutableDictionary<Complex, ComplexCell<T>> ReadAsComplex<T>(IEnumerable<T>? ignoreItems = null)
+        where T : IComparable
+    {
+        var inputMap = ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
+        var map = Enumerable.Range(0, inputMap[0].Length)
+            .SelectMany(x => Enumerable.Range(0, inputMap.Length),
+                (column, row) =>
+                {
+                    var cell = new ComplexCell<T>(row, column, ConvertOrDefault<T>(inputMap[column][row].ToString()));
+                    return new KeyValuePair<Complex, ComplexCell<T>>(cell.Coordinate, cell);
+                });
+
+        if (ignoreItems?.Any() == true)
+        {
+            map = map.Where(kvp => !ignoreItems.Contains(kvp.Value.Value));
+        }
+
+        return map.ToImmutableDictionary();
     }
 
     public string ReadAll()
@@ -68,25 +91,24 @@ public class Reader
         T[] contentAsT = new T[ContentLines.Length];
         for (int i = 0; i < ContentLines.Length; i++)
         {
-            if (ContentLines[i] == "")
-                continue;
-            try
-            {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
-                if (converter == null)
-                {
-                    return null;
-                }
-
-                contentAsT[i] = (T)converter.ConvertFromString(ContentLines[i]);
-            }
-            catch (NotSupportedException)
-            {
-                return null;
-            }
+            if (ContentLines[i] == "" && removeEmpty) continue;
+            contentAsT[i] = ConvertOrDefault<T>(ContentLines[i]);
         }
 
         return contentAsT;
+    }
+
+    private T? ConvertOrDefault<T>(string input)
+    {
+        try
+        {
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+            return (T?)converter.ConvertFromString(input);
+        }
+        catch (NotSupportedException)
+        {
+            return default;
+        }
     }
 
     public void Clear()

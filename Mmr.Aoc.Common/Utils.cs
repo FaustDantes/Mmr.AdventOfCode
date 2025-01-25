@@ -1,36 +1,66 @@
-﻿using Mmr.Aoc.Common.Models;
+﻿using System.Numerics;
+using Mmr.Aoc.Common.Models;
 
 namespace Mmr.Aoc.Common;
 
 public static class Utils
 {
     public static readonly double Sqrt2 = Math.Sqrt(2);
-    
+
     public static long Multiply(this IEnumerable<long> list)
     {
         return list.Aggregate((a, x) => a * x);
     }
-    
+
     public static long Concate(this long a, long b)
     {
-        return long.Parse(a+""+b);
+        return long.Parse(a + "" + b);
     }
-    
+
     public static MetrixCell<string> CreateCell(int x, int y, string value)
     {
         return new MetrixCell<string>(x, y, value);
     }
-    
+
     public static MetrixCell<char> CreateCell(int x, int y, char value)
     {
         return new MetrixCell<char>(x, y, value);
     }
-    
+
     public static MetrixCell<int> CreateCell(int x, int y, int value)
     {
         return new MetrixCell<int>(x, y, value);
     }
-    
+
+    public static void PrintMatrix<T>(this IDictionary<Complex, ComplexCell<T>>? matrix)
+    {
+        if (matrix == null)
+        {
+            Console.WriteLine("Matrix is null.");
+            return;
+        }
+
+        var rows = matrix
+            .GroupBy(item => item.Key.Imaginary)
+            .OrderBy(group => group.Key);
+
+        Console.WriteLine("---" + string.Join(" ", Enumerable.Range(0, rows.Count())));
+
+        foreach (var group in rows)
+        {
+            var row = group.OrderBy(item => item.Key.Real)
+                .Select(item => item.Value.Value);
+
+            Console.Write((int)group.Key + "> ");
+            foreach (var value in row)
+            {
+                Console.Write(value + " ");
+            }
+
+            Console.WriteLine();
+        }
+    }
+
     /// <summary>
     /// Changes both coordinates of cell.
     /// </summary>
