@@ -64,6 +64,15 @@ public class ComplexCell<T>
     }
     
     /// <summary>
+    /// Define complex metrix
+    /// </summary>
+    public ComplexCell(Complex coordinate, T value)
+    {
+        Coordinate = coordinate;
+        Value = value;
+    }
+    
+    /// <summary>
     /// Distance between two points
     /// </summary>
     public Complex DistanceTo(ComplexCell<T> destination)

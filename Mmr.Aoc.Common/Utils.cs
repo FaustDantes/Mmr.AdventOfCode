@@ -32,6 +32,26 @@ public static class Utils
         return new MetrixCell<int>(x, y, value);
     }
 
+    public static bool IsInMatrix<T>(this ComplexCell<T> item, IDictionary<Complex, ComplexCell<T>>? matrix)
+    {
+        if (matrix == null)
+        {
+            return false;
+        }
+
+        return matrix.ContainsKey(item.Coordinate); 
+    }
+    
+    public static bool IsInMatrix<T>(this Complex item, IDictionary<Complex, ComplexCell<T>>? matrix)
+    {
+        if (matrix == null)
+        {
+            return false;
+        }
+
+        return matrix.ContainsKey(item); 
+    }
+
     public static void PrintMatrix<T>(this IDictionary<Complex, ComplexCell<T>>? matrix)
     {
         if (matrix == null)
