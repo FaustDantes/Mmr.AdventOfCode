@@ -5,7 +5,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        RunYear2024("Day08");
+        RunYear2024("Day09");
     }
 
     private static void RunYear2024(string dayCode)
