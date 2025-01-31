@@ -5,12 +5,9 @@ public class Day09A : DayAbstract {
         string input = reader.ReadAll();
         var disk = ParseDisk(input);
         CompactDisk(disk);
-        int checksum = CalculateChecksum(disk);
-        Console.WriteLine("Checksum: " + checksum);
-
-        Result = checksum;
+        Result = CalculateChecksum(disk);
     }
-    static List<char> ParseDisk(string input) {
+    private static List<char> ParseDisk(string input) {
         List<char> disk = new();
         int fileId = 0;
 
@@ -27,13 +24,15 @@ public class Day09A : DayAbstract {
         return disk;
     }
 
-    static void CompactDisk(List<char> disk) {
-        int writeIndex = 0;
-        for (int readIndex = 0; readIndex < disk.Count; readIndex++) {
-            if (disk[readIndex] != '.') {
-                (disk[writeIndex], disk[readIndex]) = (disk[readIndex], disk[writeIndex]);
-                writeIndex++;
-            }
+    private static void CompactDisk(List<char> disk) {
+        int writeIndex = disk.Count - 1;
+
+        for (int readIndex = 0; readIndex < disk.Count && readIndex != writeIndex; readIndex++) {
+            if (disk[readIndex] != '.') continue;
+            if (disk[writeIndex] == '.') continue;
+
+            (disk[writeIndex], disk[readIndex]) = (disk[readIndex], disk[writeIndex]);
+            writeIndex = disk.Index().Where(x => x.Item != '.').Max().Index;
         }
     }
 
