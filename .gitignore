@@ -401,3 +401,5 @@ FodyWeavers.xsd
 *.sln.iml
 Mmr.Aoc2024/Days/*/input.txt
 Mmr.Aoc2024/input.txt
+
+**/input.txt
