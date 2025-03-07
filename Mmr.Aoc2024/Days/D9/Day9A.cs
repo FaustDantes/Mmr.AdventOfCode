@@ -1,4 +1,4 @@
-﻿using Mmr.Aoc.Common.Models;
+using Mmr.Aoc.Common.Models;
 
 namespace Mmr.Aoc2024.Days;
 
@@ -32,4 +32,3 @@ public class Day09A : DayAbstract
         return disk.Checksum();
     }
 }
-

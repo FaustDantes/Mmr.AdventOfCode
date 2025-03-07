@@ -9,8 +9,6 @@ public class Day06A : DayAbstract
     {
         var input = reader.ReadAsMatrix();
         var guard = Guard.CreateFromMatrix(input);
-// For demo and debug purposes
-        //    PrintPlan(input, 0);
 
         PlayGame(input, guard);
         Result = guard.StepCount;
@@ -36,10 +34,6 @@ public class Day06A : DayAbstract
 
     private bool MakeStep(char[][] map, Guard guard, int iteration)
     {
-        // For demo and debug purposes
-        //  Thread.Sleep(100);
-        //  PrintPlan(map, iteration);
-
         var xCurrent = guard.PositionX;
         var yCurrent = guard.PositionY;
         map[xCurrent][yCurrent] = 'X';
@@ -88,9 +82,6 @@ public class Day06A : DayAbstract
 
     private void PrintPlan(char[][] matrix, int iteration)
     {
-        Console.Clear();
-        Console.WriteLine($"------- step: {iteration}. ----------");
-
         int rows = matrix[0].Length;
         int cols = matrix.Length;
 

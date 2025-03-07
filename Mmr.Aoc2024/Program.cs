@@ -22,7 +22,7 @@ public class Program
         {
             try
             {
-                var reader = new Reader(@"C:\Users\m_mar\Documents\repos\MMr\Mmr.AdventOfCode\Mmr.Aoc2024\input.txt");
+                var reader = new Reader(@"input.txt"); 
                 var res = ((DayAbstract)Activator.CreateInstance(dayType)!).MainMethod(reader);
                 PrintDayResult(res, dayType.Name);
             }
