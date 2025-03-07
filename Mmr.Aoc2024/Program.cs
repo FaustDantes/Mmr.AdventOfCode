@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+
 namespace Mmr.Aoc2024;
 
 public class Program
@@ -10,8 +11,8 @@ public class Program
 
     private static void RunYear2024(string dayCode)
     {
-        var onlySpecificPart = dayCode.EndsWith("A") || dayCode.EndsWith("B");  
-        
+        var onlySpecificPart = dayCode.EndsWith("A") || dayCode.EndsWith("B");
+
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(p => (typeof(DayAbstract)).IsAssignableFrom(p))
@@ -21,14 +22,14 @@ public class Program
         {
             try
             {
-                var reader = new Reader(@"C:\Users\m_mar\Documents\repos\MMr\Mmr.AdventOfCode\Mmr.Aoc2024\input.txt"); 
+                var reader = new Reader(@"C:\Users\m_mar\Documents\repos\MMr\Mmr.AdventOfCode\Mmr.Aoc2024\input.txt");
                 var res = ((DayAbstract)Activator.CreateInstance(dayType)!).MainMethod(reader);
                 PrintDayResult(res, dayType.Name);
             }
             catch (Exception e)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Unexpected error or the input is in incorrect format: \n" );
+                Console.WriteLine("Unexpected error or the input is in incorrect format: \n");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(e);
                 Console.ForegroundColor = ConsoleColor.White;

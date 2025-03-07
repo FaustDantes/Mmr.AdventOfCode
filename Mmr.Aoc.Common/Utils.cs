@@ -1,12 +1,40 @@
 ﻿using System.Numerics;
+using System.Text.RegularExpressions;
 using Mmr.Aoc.Common.Models;
 
 namespace Mmr.Aoc.Common;
 
 public static class Utils
 {
-    public static readonly double Sqrt2 = Math.Sqrt(2);
-
+    private const RegexOptions Options = RegexOptions.Compiled;
+    private static readonly Regex NumberRegex = new(pattern: @"(-?\d+)", Options);
+    
+    /// <summary>
+    ///     Parse the provided string, returning the first found number.
+    /// </summary>
+    /// <param name="s">The string to parse</param>
+    /// <typeparam name="T">The type of number to parse</typeparam>
+    /// <returns>The first parsed number</returns>
+    /// <exception cref="FormatException">When at least one number cannot be parsed</exception>
+    public static T ParseNumber<T>(this string s) where T : INumber<T>
+    {
+        var numbers = ParseNumbers<T>(s);
+        return numbers.Length != 0
+            ? numbers[0]
+            : throw new FormatException($"Invalid number format [{s}]");
+    }
+    public static T[] ParseNumbers<T>(this string s) where T : INumber<T>
+    {
+        return NumberRegex.Matches(s)
+            .Select(m => T.Parse(s: m.Value.AsSpan(), provider: null))
+            .ToArray();
+    }
+    
+    public static int AsDigit(this char c)
+    {
+        return c - '0';
+    }
+    
     public static long Multiply(this IEnumerable<long> list)
     {
         return list.Aggregate((a, x) => a * x);
