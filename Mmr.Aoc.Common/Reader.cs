@@ -31,8 +31,12 @@ public class Reader
     {
         return ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
     }
-
-    public ImmutableDictionary<Complex, ComplexCell<T>> ReadAsComplex<T>(IEnumerable<T>? ignoreItems = null)
+    
+    /// <summary>
+    /// The key represent coordinates of the cell.
+    /// Real value == X and imaginary is Y
+    /// </summary>
+    public ImmutableDictionary<Complex, ComplexCell<T>> ReadAsComplex<T>(IEnumerable<T>? ignoreItems = null, IComparer<Complex> comparer = null)
         where T : IComparable
     {
         var inputMap = ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
@@ -49,7 +53,7 @@ public class Reader
             map = map.Where(kvp => !ignoreItems.Contains(kvp.Value.Value));
         }
 
-        return map.ToImmutableDictionary();
+        return map.ToImmutableDictionary(keyComparer: new PrimitiveComplexComparer());
     }
 
     public string ReadAll()

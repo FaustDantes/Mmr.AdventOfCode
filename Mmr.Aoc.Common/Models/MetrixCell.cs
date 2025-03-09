@@ -45,7 +45,6 @@ public class MetrixCell<T>
     }
 }
 
-
 public class ComplexCell<T>
 {
     public Complex Coordinate { get; }
