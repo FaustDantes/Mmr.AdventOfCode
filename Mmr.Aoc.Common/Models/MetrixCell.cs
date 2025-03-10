@@ -5,12 +5,12 @@ namespace Mmr.Aoc.Common.Models;
 
 public class MetrixCell<T>
 {
-    public Point Coordinate { get; }
+    public Coordinate Coordinate { get; }
     public T Value { get; }
 
     public MetrixCell(int x, int y, T value)
     {
-        Coordinate = new Point(x, y);
+        Coordinate = new Coordinate(x, y);
         Value = value;
     }
     

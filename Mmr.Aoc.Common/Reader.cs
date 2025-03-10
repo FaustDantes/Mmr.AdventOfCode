@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Numerics;
 using Mmr.Aoc.Common.Models;
+using System.Drawing;
 
 namespace Mmr.Aoc.Common;
 
@@ -32,6 +33,26 @@ public class Reader
         return ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
     }
     
+    public ImmutableSortedDictionary<Coordinate, MetrixCell<T>>? ReadAsMetrix<T>(IEnumerable<T>? ignoreItems = null) where T : IComparable
+    {
+        var inputMap = ReadAndGetLines().Select(x => x.ToCharArray()).ToArray();
+        var map = Enumerable.Range(0, inputMap[0].Length)
+            .SelectMany(x => Enumerable.Range(0, inputMap.Length),
+                (column, row) =>
+                {
+                    var cell = new MetrixCell<T>(row, column, ConvertOrDefault<T>(inputMap[column][row].ToString()));
+                    return new KeyValuePair<Coordinate, MetrixCell<T>>(cell.Coordinate, cell);
+                });
+
+        if (ignoreItems?.Any() == true)
+        {
+            map = map.Where(kvp => !ignoreItems.Contains(kvp.Value.Value));
+        }
+
+        return map.ToImmutableSortedDictionary();
+    }
+    
+    
     /// <summary>
     /// The key represent coordinates of the cell.
     /// Real value == X and imaginary is Y
@@ -53,7 +74,7 @@ public class Reader
             map = map.Where(kvp => !ignoreItems.Contains(kvp.Value.Value));
         }
 
-        return map.ToImmutableDictionary(keyComparer: new PrimitiveComplexComparer());
+        return map.ToImmutableDictionary();
     }
 
     public string ReadAll()
